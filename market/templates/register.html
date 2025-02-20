@@ -8,6 +8,7 @@ Register Page
 <body class="text-center"> <!--Centers the text-->
     <div class="container">
         <form method="POST" class="form-register" style="color:white">
+            {{ form.hidden_tag() }}
             {{ form.username.label() }}
             {{ form.username(class="form-control", placeholder="User Name") }}
 
