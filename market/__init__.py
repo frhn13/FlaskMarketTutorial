@@ -11,5 +11,7 @@ app.config["SECRET_KEY"] = 'aa4b5e9664c20591d44d1696' # Needed to display the fo
 db = SQLAlchemy(app) # Creates database
 bcrypt = Bcrypt(app) # Used for hashing
 login_manager = LoginManager(app)
+login_manager.login_view = "login_page" # User redirected here if they access page without logging in
+login_manager.login_message_category = "info" # Displays error message as info one
 
 from market import routes
