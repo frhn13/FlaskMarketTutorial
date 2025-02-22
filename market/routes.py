@@ -28,6 +28,8 @@ def register_page():
                               email_address=form.email_address.data,
                               password=form.password1.data)
         db.session.add(user_to_create)
+        # item_to_create = Item(name="Steve", price=12.50, barcode="123412341234", description="Image of Steve")
+        # db.session.add(item_to_create)
         db.session.commit()
         login_user(user_to_create) # Logs in created user
         flash(f"Account created successfully! You are now logged in as {user_to_create.username}", category="success")
