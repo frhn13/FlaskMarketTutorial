@@ -32,6 +32,9 @@ class User(db.Model, UserMixin):
     def check_password_correction(self, attempted_password):
         return bcrypt.check_password_hash(self.password_hash, attempted_password) # Checks if passwords are matching when hashed
 
+    def can_purchase(self, item_obj):
+        return self.budget >= item_obj.price
+
 class Item(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(length=30), nullable=False, unique=True)
@@ -42,3 +45,8 @@ class Item(db.Model):
 
     def __repr__(self): # Name of item object in DB is item name attribute
         return f"Item {self.name}"
+
+    def buy(self, user):
+        self.owner = user.id  # Assigns foreign key to user who purchased it
+        user.budget -= self.price
+        db.session.commit()
