@@ -10,7 +10,6 @@ Market Page
 <br>
 <div class="row" style="margin-top:20px; margin-left:20px"> <!--Makes margins between columns-->
     <div class="col-8">
-
         <h2>Available items on the Market</h2>
         <p>Click on one of the items to start buying</p>
       <table class="table table-hover table-dark">
@@ -43,6 +42,24 @@ Market Page
     <div class="col-4">
         <h2>Owned Items</h2>
         <p>Click on sell item to put an item back on the Market</p>
+        <br>
+        <div class="row">
+            {% for owned_item in owned_items %} <!--Displays current user's bought items in rows-->
+            {% include "includes/owned_items_modals.html" %} <!--Needed to access the modals-->
+                <div class="cold-md-6">
+                    <div style="margin-bottom: 5px" class="card text-center bg-dark">
+                         <div class="card-body">
+                             <h5 class="card-title">{{ owned_item.name }}</h5>
+                             <button type="button" class="btn btn-outline-danger" style="margin-bottom: 5px"
+                                     data-toggle="modal" data-target="#Modal-SellingConfirm-{{ owned_item.id }}">
+                                 Sell this Item
+                             </button>
+                             <p class="card-text"><strong>This item costs £{{ owned_item.price }}</strong></p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 </div>
 
